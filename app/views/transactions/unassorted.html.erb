@@ -1,0 +1,34 @@
+<h1>New Transactions</h1>
+
+<%= form_tag purpose_confirm_transactions_path, method: "post" do %>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm text-center">
+      <thead>
+        <tr>
+          <th>Purpose</th>
+          <th>Shop</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Payer</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @transactions.each do |transaction| %>
+          <tr>
+            <td>
+              <input type="hidden" name="transaction[ids][]" value=<%= transaction.id%> >
+              <%= select_tag "transaction[purpose_ids][]", ("<option value='0'>unassorted</option>" + options_from_collection_for_select(Purpose.all, 'id', 'the_name', transaction.most_possible_purpose)).html_safe, {class: 'form-control'} %>
+            </td>
+            <td><%= transaction.shop %></td>
+            <td><%= transaction.amount %></td>
+            <td><%= transaction.the_date %></td>
+            <td><%= transaction.payer %></td>
+            <td><%= transaction.the_type %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= submit_tag "Confirm", class: "btn btn-outline-secondary"%>
+<% end %>

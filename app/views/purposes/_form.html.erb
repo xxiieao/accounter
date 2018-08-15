@@ -1,0 +1,12 @@
+<%= form_with(model: purpose, local: true) do |form| %>
+  <div class="form-group row">
+    <%= form.label :name, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-6">
+      <%= form.text_field :the_name, value: purpose.the_name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-outline-secondary" %>
+  </div>
+<% end %>

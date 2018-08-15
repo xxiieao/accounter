@@ -1,0 +1,39 @@
+<h1>Purposes</h1>
+
+<%= render "layouts/alter" %>
+
+<%= form_for @new_purpose, url: {action: "create"} do |f| %>
+  <div class="input-group mb-3 col-lg-4">
+    <%= f.text_field :the_name, class: "form-control", placeholder:"Enter New Purpose Here"  %>
+    <div class="input-group-append">
+      <%= f.submit "Add", class: "btn btn-outline-secondary"%>
+    </div>
+  </div>
+<% end %>
+
+<div class="table-responsive">
+  <table class="table table-striped table-sm text-center">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Transactions</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @purposes.each do |purpose| %>
+        <tr>
+          <td><%= purpose.id %></td>
+          <td><%= purpose.the_name %></td>
+          <td><%= purpose.counter %></td>
+          <td><%= link_to 'Edit', edit_purpose_path(purpose) %> | <%= link_to 'Delete', purpose, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= will_paginate @purposes, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>

@@ -1,0 +1,37 @@
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link <%= 'active' if current_page?(data_service_index_url) || current_page?(root_url)%>" href=<%= data_service_index_path %>>
+          <span data-feather="bar-chart-2"></span>
+          Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <%= 'active' if current_page?(preview_transactions_url) %>" href=<%= preview_transactions_path%>>
+          <span data-feather="arrow-up-circle"></span>
+          Transactions Import
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <%= 'active' if current_page?(unassorted_transactions_url) %>" href=<%= unassorted_transactions_path%>>
+          <span data-feather="inbox"></span>
+          Purpose Confirm
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <%= 'active' if current_page?(transactions_url) %>" href=<%= transactions_path%>>
+          <span data-feather="layers"></span>
+          History Transactions
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link <%= 'active' if current_page?(purposes_url) %>" href=<%= purposes_path%> >
+          <span data-feather="file-text"></span>
+          Purpose
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

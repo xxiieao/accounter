@@ -1,0 +1,55 @@
+<input id="csv" type="file">
+</br>
+<button class="btn btn-outline-secondary" onclick="import_data()">
+Import
+</button>
+
+<div class="table-responsive" id="preview">
+  <table class="table table-striped table-sm text-center">
+    <thead id="preview-header">
+    </thead>
+    <tbody id="preview-body">
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+function create_header(data){
+    return '<tr>' + data.map(x => '<th>'+x+'<th>').join('') + '</tr>'
+};
+
+function create_body(data){
+    return data.map(x => create_header(x)).join('')
+};
+
+var fileInput = document.getElementById("csv")
+readFile = function () {
+    var reader = new FileReader();
+    reader.onload = function () {
+        csvData = Papa.parse(reader.result);
+        $("#preview-header")[0].innerHTML = create_header(csvData.data[0]);
+        $("#preview-body")[0].innerHTML = create_body(csvData.data.slice(1,));
+    };
+    // start reading the file. When it is done, calls the onload event defined above.
+    reader.readAsBinaryString(fileInput.files[0]);
+};
+fileInput.addEventListener('change', readFile);
+
+function import_data(){
+  $.ajax({
+    type: "POST",
+    url: "/transactions/batch_create",
+    data: JSON.stringify({"transaction": csvData}),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(msg){
+      alert(msg.responseText);
+    },
+    error: function(msg){
+      alert(msg.responseText);
+    }
+  });
+};
+
+
+</script>
