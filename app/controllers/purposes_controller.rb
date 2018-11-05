@@ -13,7 +13,7 @@ class PurposesController < ApplicationController
     purpose = Purpose.new(purpose_params)
     if purpose.save
       flash[:notice] = 'success'
-      flash[:messages] = "Purpose #{@purpose.the_name} was successfully created."
+      flash[:messages] = "Purpose #{purpose.the_name} was successfully created."
     else
       flash[:notice] = 'warnning'
       flash[:messages] = purpose.errors.full_messages

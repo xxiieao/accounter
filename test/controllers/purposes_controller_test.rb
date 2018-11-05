@@ -21,6 +21,14 @@ class PurposesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should create purpose' do
+    assert_difference('Purpose.count', 1) do
+      params = { purpose: { the_name: 'totally new name' } }
+      post purposes_url params: params
+      assert_redirected_to purposes_url
+    end
+  end
+
   test 'should update purpose' do
     params = { purpose: { the_name: 'another name' } }
     patch purpose_url(@purpose1), params: params
